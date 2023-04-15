@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/hostRegister.css">
+    <title>Register Host</title>
+</head>
+<body>
+    <h1>Register Host</h1>
+
+    <!-- <form action="/registerthat" method="post">
+        <label>Email</label>
+        <input type="email" name="email">
+        <label>Host name</label>
+        <input type="text" name="hostName">
+        <label>Host City</label>
+        <input type="text" name="hostCity">
+        <label>Password</label>
+        <input type="password" name="password">
+        <button type="submit">Register Host</button>
+    </form> -->
+    <div>
+        <p id="err"></p>
+        <label>Email</label>
+        <input type="email" id="email">
+        <label>Host name</label>
+        <input type="text" id="hn">
+        <label>Host country</label>
+        <input type="text" id="cn">
+        <label>Host City</label>
+        <input type="text" id="hc">
+        <label>Password</label>
+        <input type="password" id="pass">
+        <button id="btn">Register Host</button>
+    </div>
+
+    <a href="http://localhost:5000/host/login"><h1>Login</h1></a>
+
+    <script>
+        const err = document.querySelector('#err')
+        const email = document.querySelector('#email')
+        const hn = document.querySelector('#hn')
+        const cn = document.querySelector('#cn')
+        const hc = document.querySelector('#hc')
+        const pass = document.querySelector('#pass')
+        const btn = document.querySelector('#btn')
+
+        btn.addEventListener('click', (e) => {
+            e.preventDefault()
+            
+            fetch('http://localhost:5000/host/register', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    email: email.value, 
+                    hostName: hn.value, 
+                    country: cn.value,
+                    hostCity: hc.value, 
+                    password: pass.value
+                })
+            }).then(res => res.json())
+            .then(res => {
+                console.log('msg')
+                console.log(res)
+
+                if(res.msg == 'success'){
+                    window.location.href = 'http://localhost:5000/host/login'
+                } else {
+                    console.log('msg')
+                    err.innerHTML = res.msg
+                }
+            }).catch(err => console.log(err))
+        })
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

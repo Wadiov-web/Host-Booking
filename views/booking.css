@@ -1,0 +1,20 @@
+body {
+    background-color: rgb(192, 192, 192);
+}
+#container{
+    display: flex;
+    
+    flex-direction: row;
+}
+#wrap{
+    width: 1100px;
+    min-height: 800px;
+    background-color: #8a5555;
+    display: grid;
+    grid-template-columns: repeat(3, .5fr);
+}
+
+#wrap img {
+    max-width: 300px;
+    max-height: 300px;
+}

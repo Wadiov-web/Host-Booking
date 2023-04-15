@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/hostLogin.css">
+    <title>Host Login</title>
+</head>
+<body>
+    <h1>Login Host</h1>
+
+    <div>
+        <p id="err"></p>
+        <label>Email</label>
+        <input type="email" id="email">
+        <label>Password</label>
+        <input type="password" id="pass">
+        <button id="btn">Login Host</button>
+    </div>
+
+
+
+    <a href="http://localhost:5000/host/register"><h1>register</h1></a>
+
+    <script>
+
+
+
+
+        const err = document.querySelector('#err')
+        const email = document.querySelector('#email')
+        const pass = document.querySelector('#pass')
+        const btn = document.querySelector('#btn')
+
+        btn.addEventListener('click', (e) => {
+            e.preventDefault()
+            console.log({
+                   email: email.value, 
+                   password: pass.value
+                 })
+            fetch('http://localhost:5000/host/login', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    email: email.value, 
+                    password: pass.value
+                })
+            }).then(res => res.json())
+            .then(res => {
+                console.log('msg')
+                console.log(res)
+
+                if(res.msg == 'success'){
+                    window.location.href = 'http://localhost:5000/host/profile'
+                } else {
+                    console.log('msg')
+                    err.innerHTML = res.msg
+                }
+            }).catch(err => console.log(err))
+        })
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

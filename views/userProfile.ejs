@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/userProfile.css">
+    <title>User Profile</title>
+</head>
+<body>
+    <h1>User Profile</h1>
+    <h1><%= user.username %></h1>
+    
+
+    <div>
+        <h1>User Inbox</h1>
+        <div>
+            <%user.inbox.reverse().forEach(i => {%>
+                <%if(i.status){%>
+                    <div id="box">
+                        <div>
+                            <p>Reservation Confirmed</p>
+                            <p>By <%= i.by %></p>
+                            <p>Recepient <%= user.username %></p>
+                            <p>From <%= i.from %> To <%= i.to %></p>
+                            <p>Rooms <%= i.rooms %></p>
+                            <p>Total Price <%= i.totalPrice %>$</p>
+                        </div>
+                    </div>
+                <%} else {%>
+                    <div id="box">
+                        <div>
+                            <p>Reservation Declined</p>
+                            <p>By <%= i.by %></p>
+                            <p>Recepient <%= user.username %></p>
+                            <p>From <%= i.from %> To <%= i.to %></p>
+                            <p>Rooms <%= i.rooms %></p>
+                        </div>
+                    </div>
+                <%}%>
+            <%})%>
+
+            <div id="box">
+                <div>
+                    <p>Reservation Confirmed</p>
+                    <p>By Sarrassin Hotel</p>
+                    <p>Recepient Wadiov Alika</p>
+                    <p>From 01/02/2023 To 14/02/2023</p>
+                    <p>Rooms 3</p>
+                    <p>Total Price 356$</p>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+
+    <form action="/user/logout" method="POST">
+        <button type="submit">LogOut</button>
+    </form>
+
+
+</body>
+</html>

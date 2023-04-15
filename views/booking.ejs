@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/booking.css">
+    <title>Booking</title>
+</head>
+<body>
+    <div id="container">
+        <div>
+        <h1><%= host.hostName %></h1>
+        <h1><%= host.hostCity %>, <%= host.country %></h1>
+        
+        <%if(host.infos.room > 0){%>
+            <form action="/book-now" method="POST">
+                <label>Host Name</label>
+                <input type="text" name="hostName" value="<%= host.hostName %>">
+                <h2>One Night Price: </h2> <h1 id="price"><%= host.infos.price %>$</h1>
+                <h2>Dates Available From: <%= host.infos.from %> To <%= host.infos.to %></h2>
+
+                <label>From</label>
+                <input type="date" name="from" id="from">
+                <label>To</label>
+                <input type="date" name="to" id="to">
+                <button id="select">select</button>
+
+                <h2>Days :</h2>
+                <input type="text" name="days" id="day">
+
+
+                <h2>Rooms: <%= host.infos.room %></h2>
+                <input type="text" name="rooms" id="rooms" max="6">
+
+                <h2>Total Price $:</h2>
+                <input type="text" name="totalPrice" id="tPrice"><br>
+
+                <button type="submit">Book Now</button>
+            </form>
+        <%} else {%>
+            <label>Host Name</label>
+            <input type="text" name="hostName" value="<%= host.hostName %>">
+            <h2>One Night Price: </h2> <h1 id="price"><%= host.infos.price %>$</h1>
+            <h1>Sorry, No rooms are available for the moment</h1>
+        <%}%>
+    </div>
+        <div id="wrap">
+            <%host.images.forEach(i => {%>
+                <img src="http://localhost:5000/<%= i %>" >
+            <%})%>
+        </div>
+    </div>
+    
+
+
+
+    <script>
+        const rooms = document.querySelector('#rooms')
+        const tPrice = document.querySelector('#tPrice')
+        const price = document.querySelector('#price')
+
+        const day = document.querySelector('#day')
+        const select = document.querySelector('#select')
+
+        select.addEventListener('click', (e) => {
+            e.preventDefault()
+            const from = document.querySelector('#from').value
+            const to = document.querySelector('#to').value
+            
+            const dateOne = new Date(from)
+            const dateTwo = new Date(to)
+            const time = Math.abs(dateTwo - dateOne)
+            const days = Math.ceil(time / (1000 * 60 * 60 * 24))
+            console.log(days)
+            day.value = days
+        })
+
+
+        rooms.addEventListener('keyup', () => {
+            console.log(rooms.value)
+            tPrice.value = parseInt(rooms.value) * parseInt(price.innerHTML) * parseInt(day.value)
+        })
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Host Profile</title>
+</head>
+<body>
+    <h1>Host Profile</h1>
+    <a href="http://localhost:5000/host/profile">Home</a>
+    <a href="http://localhost:5000/host/inbox">Inbox</a>
+    <h1><%= data %></h1>
+    <div>
+        <h1>Add Host Infos</h1><br>
+        <form action="/host/addinfo" method="POST">
+            <label>Host rooms</label>
+            <input type="number" name="room"><br>
+            <label>Available from</label>
+            <input type="date" name="from">
+            <label>To</label>
+            <input type="date" name="to"><br>
+            <label>Price $</label>
+            <input type="text" name="price"><br>
+            <button type="submit">submit</button>
+        </form><br>
+        <form action="/host/addimage" method="POST" enctype="multipart/form-data">
+            <label>Host images</label>
+            <input type="file" name="image">
+            <button type="submit">Add</button>
+        </form>
+
+
+
+        <form action="/host/logout" method="POST">
+            <button type="submit">LogOut</button>
+        </form>
+
+    </div>
+    
+
+</body>
+</html>

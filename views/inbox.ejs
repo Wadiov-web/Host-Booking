@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/hostInbox.css">
+    <title>Host Inbox</title>
+</head>
+<body>
+    <h1>Host Inbox</h1>
+    <div>
+        <a href="http://localhost:5000/host/profile">Home</a>
+        <a href="http://localhost:5000/host/inbox">Inbox</a>
+    </div>
+
+    <div id="cont">
+        <div id="request">
+            <h2>Requests</h2>
+            <div>
+                <%host.requests.reverse().forEach(r => {%>
+                    <div id="box">
+                        <div>
+                            <p>Booked By <%= r.by %></p>
+                            <p>From <%= r.from %> To <%= r.to %></p>
+                            <p>Rooms <%= r.rooms %></p>
+                            <p>Total Price <%= r.totalPrice %>$</p>
+                        </div>
+                        
+                        <form action="/host/accept" method="POST">
+                            <button type="submit" name="user" value="<%= r.by %>">accept</button>
+                        </form>
+                        <form action="/host/decline" method="POST">
+                            <button type="submit" name="user" value="<%= r.by %>">decline</button>
+                        </form>
+                    </div>
+                <%})%>
+
+
+
+
+                <div id="box">
+                    <div>
+                        <p>Booked By Wadiov Alika</p>
+                        <p>From 01/02/2023 To 14/02/2023</p>
+                        <p>Rooms 3</p>
+                        <p>Total Price 356$</p>
+                    </div>
+                    <button>accept</button>
+                    <button>decline</button>
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+        <div>
+            <h2>Notifications</h2>
+            <div>
+                <%host.notification.reverse().forEach(n => {%>
+                    <div id="nbox">
+                        <p><%= n.by %> Booking request From <%= n.from %> To <%= n.to %> <%= n.rooms %> rooms by <%= host.hostName %></p>
+                        <%if(n.status){%>
+                            <p>Was Accepted</p>
+                        <%} else {%>
+                            <p>Was Declined</p>
+                        <%}%>
+                    </div>
+                <%})%>
+
+                <div id="nbox">
+                    <p>Wadiov Alika Booking request From 01/02/2023 To 14/02/2023 3 rooms</p>
+                    <p>was Declined</p>
+                </div>
+                <div id="nbox">
+                    <p>Wadiov Alika Booking request From 01/02/2023 To 14/02/2023 3 rooms</p>
+                    <p>was Declined</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
